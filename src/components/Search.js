@@ -1,5 +1,6 @@
 import React from "react";
 import { useSearch } from "../context/search";
+import apiService from "../utils/apiService";
 
 const Search = () => {
   const [values, setValues] = useSearch();
@@ -21,7 +22,7 @@ const Search = () => {
               style={{ width: "18rem" }}
             >
               <img
-                src={`/product/product-photo/${p._id}`}
+                src={`${apiService.defaults.baseURL}/product/product-photo/${p._id}`}
                 className="card-img-top"
                 alt={p.name}
               />

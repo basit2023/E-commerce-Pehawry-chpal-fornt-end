@@ -43,7 +43,7 @@ const Products = () => {
               >
                 <div className="bg-white rounded-lg overflow-hidden shadow-md">
                   <img
-                    src={`/product/product-photo/${p._id}`}
+                    src={`${apiService.defaults.baseURL}/product/product-photo/${p._id}`}
                     className="w-full h-40 object-cover"
                     alt={p.name}
                   />

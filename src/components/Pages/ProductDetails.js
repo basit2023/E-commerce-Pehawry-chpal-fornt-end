@@ -41,7 +41,7 @@ const ProductDetails = () => {
       <div className="container mx-auto my-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex justify-center">
           <img
-            src={`/product/product-photo/${product._id}`}
+            src={`${apiService.defaults.baseURL}/product/product-photo/${product._id}`}
             className="object-cover w-full md:w-96 h-72 md:h-full rounded-lg"
             alt={product.name}
           />
@@ -76,7 +76,7 @@ const ProductDetails = () => {
           {relatedProducts?.map((p) => (
             <div key={p._id} className="card relative">
               <img
-                src={`/product/product-photo/${p._id}`}
+                src={`${apiService.defaults.baseURL}/product/product-photo/${p._id}`}
                 className="object-cover w-full h-44"
                 alt={p.name}
               />

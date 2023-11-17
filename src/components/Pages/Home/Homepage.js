@@ -27,6 +27,7 @@ const HomePage = () => {
       const { data } = await apiService.get("/catagory/get-all");
       if (data?.success) {
         setCategories(data?.category);
+        
       }
     } catch (error) {
       console.log(error);
@@ -70,7 +71,7 @@ const HomePage = () => {
   const loadMore = async () => {
     try {
       setLoading(true);
-      const { data } = await apiService.get(`product-list/${page}`);
+      const { data } = await apiService.get(`product/product-list/${page}`);
       setLoading(false);
       setProducts([...products, ...data?.products]);
     } catch (error) {
@@ -160,7 +161,7 @@ const HomePage = () => {
             {products?.map((p) => (
               <div className="card m-2" key={p._id}>
                 <img
-                  src={`/product/product-photo/${p._id}`}
+                  src={`${apiService.defaults.baseURL}/product/product-photo/${p._id}`}
                   className="card-img-top"
                   alt={p.name}
                 />

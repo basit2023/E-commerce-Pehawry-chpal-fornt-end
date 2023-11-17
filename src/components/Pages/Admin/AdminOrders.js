@@ -93,7 +93,7 @@ console.log("the order is:",orders)
                   <div key={p._id} className="flex mb-4">
                     <div className="w-1/4">
                       <img
-                        src={`/product/product-photo/${p._id}`}
+                        src={`${apiService.defaults.baseURL}/product/product-photo/${p._id}`}
                         alt={p.name}
                         className="w-full h-auto"
                       />

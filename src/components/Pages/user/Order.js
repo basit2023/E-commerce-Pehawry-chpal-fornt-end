@@ -60,7 +60,7 @@ const Orders = () => {
                   <div key={i} className="flex mb-4">
                     <div className="w-1/4">
                       <img
-                        src={`/product/product-photo/${p._id}`}
+                        src={`${apiService.defaults.baseURL}/product/product-photo/${p._id}`}
                         className="card-img-top"
                         alt={p.name}
                         width="100px"
