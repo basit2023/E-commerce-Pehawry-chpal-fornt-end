@@ -70,7 +70,7 @@ const HomePage = () => {
   const loadMore = async () => {
     try {
       setLoading(true);
-      const { data } = await apiService.get(`/product/product-list/${page}`);
+      const { data } = await apiService.get(`product-list/${page}`);
       setLoading(false);
       setProducts([...products, ...data?.products]);
     } catch (error) {
