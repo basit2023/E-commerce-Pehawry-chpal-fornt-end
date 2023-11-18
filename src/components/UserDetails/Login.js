@@ -12,32 +12,40 @@ const Login = () => {
     const navigate = useNavigate(); // Updated to use useNavigate
     const location=useLocation()
    const [auth, setAuth]=useAuth()
-    const sumitHandler = async (e) => { // Corrected typo from 'sumitHandler' to 'submitHandler'
-        e.preventDefault();
-        const user = {
-            email: email,
-            password: password
-        }
-        try {
-            const res = await apiService.post('/user/login', user);
+   const sumitHandler = async (e) => {
+                e.preventDefault();
+                const user = {
+                email: email,
+                password: password
+                };
             
-            if (res.data && res.data.message) {
-                setError(false); // Removed this line since 'setError' is not used in this context
-                toast.success(res.data && res.data.message);
-                setAuth({
+                try {
+                const res = await apiService.post('/user/login', user);
+            
+                if (res.data && res.data.message) {
+                    setError(false);
+                    toast.success(res.data && res.data.message);
+            
+                    const token = res.data.token;
+            
+                    // Set the token in the Authorization header for immediate subsequent requests
+                    apiService.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                    console.log("the fron-end webtokken is:",apiService.defaults.headers);
+                    setAuth({
                     ...auth,
                     user: res.data.user,
-                    token: res.data.token,
-                  });
-                localStorage.setItem("auth", JSON.stringify(res.data));
-                navigate(location.state||"/"); // Redirect to the main page after successful login
-            }
-        } catch (error) {
-            console.log(error);
-            setError(true);
-            toast.error(error.message); // Updated to display the error message from the caught error
-        }
-    }
+                    token: token,
+                    });
+            
+                    localStorage.setItem("auth", JSON.stringify(res.data));
+                    navigate(location.state || "/"); // Redirect to the main page after successful login
+                }
+                } catch (error) {
+                console.log(error);
+                setError(true);
+                toast.error(error.message); // Updated to display the error message from the caught error
+                }
+            };
     return (
         <div className="bg-gray-100 h-screen w-screen flex justify-center items-center">
             <div className="bg-white px-6 py-3 rounded border w-64">
